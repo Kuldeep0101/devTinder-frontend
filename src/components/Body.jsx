@@ -11,7 +11,7 @@ const Body = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-const userData = useSelector((store)=>store.user) 
+    const userData = useSelector((store) => store.user)
 
     const fetchUser = async () => {
         try {
@@ -23,16 +23,16 @@ const userData = useSelector((store)=>store.user)
             if (error.status === 401) {
                 navigate("/login")
             }
-          
+
             console.log(error)
         }
     }
     useEffect(() => {
-        if(!userData){
+        if (!userData) {
             fetchUser()
         }
-       
-    },[])
+
+    }, [])
 
     return (
         <>

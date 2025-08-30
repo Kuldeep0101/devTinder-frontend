@@ -13,7 +13,10 @@ export default function Login() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    let [errorMessage, setErroMessage] = useState("")
+
     const handleLogin = async () => {
+        setErroMessage("")
         try {
             const res =
                 await axios.post(BASE_URL + "/login", {
@@ -23,8 +26,9 @@ export default function Login() {
                 })
             dispatch(addUser(res.data))
             navigate("/")
-        } catch (error) {
-            console.log(error)
+        } catch (err) {
+            setErroMessage(JSON.stringify(err.response.data))
+            console.log(JSON.stringify(err.response.data))
             // alert("Error while making the API call")
         }
     }
@@ -61,7 +65,7 @@ export default function Login() {
                             Password
                         </label>
                         <input
-                            type="password"
+                            // type="password"
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -70,6 +74,9 @@ export default function Login() {
                             className="w-full px-5 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-indigo-500 transition"
                         />
                     </div>
+
+                    <p className='text-red-500'>{errorMessage.toString()}</p>
+
                     <button
                         type="submit"
                         className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white font-bold text-lg shadow-lg transition transform hover:-translate-y-1 hover:scale-105 cursor-pointer"
