@@ -75,7 +75,7 @@ export default function Login() {
                         />
                     </div>
 
-                    <p className='text-red-500'>{errorMessage.toString()}</p>
+                    <p className='text-red-500'>{errorMessage}</p>
 
                     <button
                         type="submit"
