@@ -6,20 +6,18 @@ import { removeUser } from "../utils/userSlice";
 import { useState } from "react";
 
 const NavBar = () => {
-    const user = useSelector((state) => state.user)
+    const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
-
-    
+    const navigate = useNavigate();
 
     const handleLogout = async () => {
         try {
             await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
             dispatch(removeUser());
-            return navigate("/login")
+            return navigate("/login");
         } catch (error) {
             //error handle logic- redirect to error page
-           
+
             console.log(error);
         }
     };
@@ -54,16 +52,19 @@ const NavBar = () => {
                                         {/* <span className="badge">New</span> */}
                                     </Link>
                                 </li>
-
                                 <li>
-                                    
+                                    <Link to="/connections">Connections</Link>
+                                </li> 
+                                <li>
+                                    <Link>Requests</Link>
                                 </li>
-{/* 
                                 <li>
-                                    <a>Settings</a>
-                                </li> */}
-                                <li>
-                                    <a className=" hover:bg-red-300 active:bg-blue-800" onClick={handleLogout}>Logout</a>
+                                    <a
+                                        className=" hover:bg-red-300 active:bg-blue-800"
+                                        onClick={handleLogout}
+                                    >
+                                        Logout
+                                    </a>
                                 </li>
                             </ul>
                         </div>
