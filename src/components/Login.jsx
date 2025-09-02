@@ -8,12 +8,12 @@ import { BASE_URL } from '../utils/constant';
 export default function Login() {
     const [emailId, setEmailId] = useState('kuldeepsingh44682@gmail.com');
     const [password, setPassword] = useState('Ayushman@123');
+    const [errorMessage, setErroMessage] = useState("")
 
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    let [errorMessage, setErroMessage] = useState("")
 
     const handleLogin = async () => {
         setErroMessage("")

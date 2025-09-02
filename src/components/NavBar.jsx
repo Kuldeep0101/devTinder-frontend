@@ -49,16 +49,21 @@ const NavBar = () => {
                                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
                             >
                                 <li>
-                                    <Link to="/profile/view" className="justify-between">
+                                    <Link to="/profile" className="justify-between">
                                         {user.firstName}'s Profile
-                                        <span className="badge">New</span>
+                                        {/* <span className="badge">New</span> */}
                                     </Link>
                                 </li>
+
+                                <li>
+                                    
+                                </li>
+{/* 
                                 <li>
                                     <a>Settings</a>
-                                </li>
+                                </li> */}
                                 <li>
-                                    <a onClick={handleLogout}>Logout</a>
+                                    <a className=" hover:bg-red-300 active:bg-blue-800" onClick={handleLogout}>Logout</a>
                                 </li>
                             </ul>
                         </div>
