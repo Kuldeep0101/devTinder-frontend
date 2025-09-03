@@ -4,8 +4,10 @@ import { BASE_URL } from '../utils/constant';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFeed } from '../utils/feedSlice'
 import UserCards from './UserCards';
+import { useNavigate } from 'react-router-dom';
 
 function Feed() {
+    const navigate = useNavigate()
     const feed = useSelector((store) => store.feed)
     const dispatch = useDispatch()
     console.log(feed)
@@ -20,7 +22,13 @@ function Feed() {
         }
     }
 
+
     useEffect(() => { getFeed() }, [])
+
+    if (!getFeed){
+         navigate("/")
+    }
+
 
     return (
         < div className='' >

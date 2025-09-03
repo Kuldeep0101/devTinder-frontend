@@ -1,49 +1,47 @@
 import axios from 'axios'
-import { useSelector, useDispatch } from "react-redux";
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { BASE_URL } from '../utils/constant'
-import { addConnections } from '../utils/connectionSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { addRequest } from '../utils/requestSlice'
 
-const Connections = () => {
-    const connections = useSelector(store => store.connections);
-    const dispatch = useDispatch();
-
-    // Pagination state
-    const [visibleCount, setVisibleCount] = useState(6);
-
-    const fetchConnections = async () => {
-        try {
-            const res = await axios.get(BASE_URL + "/user/connections", { withCredentials: true });
-            dispatch(addConnections(res.data.data));
-        } catch (error) {
-            console.error(error);
-        }
-    };
+function Requests() {
+    const dispatch = useDispatch()
+    const requests = useSelector((store) => store.requests)
+    const fetchRequests = async () => {
+        const res = await axios.get(BASE_URL + "/user/request/received", { withCredentials: true })
+        dispatch(addRequest(res.data.data))
+    }
 
     useEffect(() => {
-        fetchConnections();
-    }, []);
+        fetchRequests()
+    }, [])
 
-    if (!connections) return null;
-    if (connections.length === 0) {
-        return <h1 className="text-center text-2xl font-bold mt-10">No connections found!!</h1>;
+    if (!fetchRequests) {
+        return null
     }
+
+    // if (fetchRequests.length === 0) {
+    //     return <h1 className="text-center text-2xl font-bold mt-10">No requests found!!</h1>;
+    // }
+
 
     return (
         <div className="px-6 py-10">
             {/* Heading */}
             <h1 className="text-4xl font-extrabold text-center mb-10 text-gray-800 tracking-tight">
-                My Connections
+                My Requests
             </h1>
 
             {/* Grid container */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-                {connections.slice(0, visibleCount).map((connection, idx) => {
-                    const { firstName, lastName, photoUrl, age, gender, about, skills } = connection;
+                {requests.slice(0).map((connection, idx) => {
+
+                    const {_id, firstName, lastName, photoUrl, age, gender, about, skills } = connection.fromUserId;
+
 
                     return (
                         <div
-                            key={idx}
+                            key={_id}
                             className="card bg-white w-80 rounded-2xl shadow-xl border border-gray-200 hover:shadow-2xl transition-all duration-300"
                         >
                             {/* User photo */}
@@ -83,29 +81,32 @@ const Connections = () => {
                                 </div>
                             </div>
 
-                            {/* Buttons */}
-                                <button>send message</button>
-                                <button>video call</button>
+                            <div className="flex justify-evenly p-6 border-t border-gray-200">
+                                <button className="btn btn-outline btn-success flex-1 mx-2 rounded-full font-semibold transition-all duration-300 hover:scale-105">Accept</button>
+                                <button className="btn btn-outline btn-warning flex-1 mx-2 rounded-full font-semibold transition-all duration-300 hover:scale-105">Reject</button>
 
-                          
+                            </div>
+
                         </div>
                     );
-                })}
+                })
+                }
+
             </div>
 
             {/* Load More Button */}
-            {visibleCount < connections.length && (
+           (
                 <div className="flex justify-center mt-10">
                     <button
-                        onClick={() => setVisibleCount(prev => prev + 6)}
+                        // onClick={() => setVisibleCount(prev => prev + 6)}
                         className="px-6 py-3 bg-blue-600 text-white rounded-full font-semibold shadow-lg hover:bg-blue-700 transition-all duration-300"
                     >
                         Load More
                     </button>
                 </div>
-            )}
+            )
         </div>
     );
-};
+}
 
-export default Connections;
+export default Requests
