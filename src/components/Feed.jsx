@@ -30,9 +30,22 @@ function Feed() {
     }
 
 
+
+    if (!feed) {
+      return null;
+    }
+
+    if (feed.length === 0) {
+      return (
+        <h1 className="text-center text-2xl font-bold mt-10">
+          no new users found!!
+        </h1>
+      );
+    }
+
     return (
         < div className='' >
-            {feed && feed.length > 0 && <UserCards user={feed[8]} />}
+            {feed && feed.length > 0 && <UserCards user={feed[0]} />}
         </div >
     )
 }

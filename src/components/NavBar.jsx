@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constant";
 import { removeUser } from "../utils/userSlice";
 import { useState } from "react";
+import {  removeUserFromFeed } from "../utils/feedSlice";
 
 const NavBar = () => {
   const user = useSelector((state) => state.user);
@@ -13,7 +14,7 @@ const NavBar = () => {
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
-      dispatch(removeUser());
+      dispatch(removeUserFromFeed());
       return navigate("/login");
     } catch (error) {
       //error handle logic- redirect to error page
