@@ -17,7 +17,6 @@ const UserCards = ({ user }) => {
   // Safely destructure the user object to access its properties.
   const { firstName, lastName, age, gender, photoUrl, about, skills, _id } =
     user;
-
   const dispatch = useDispatch();
 
   const handleSendRequest = async (status, toUserId) => {

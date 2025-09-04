@@ -45,7 +45,7 @@ function Feed() {
 
     return (
         < div className='' >
-            {feed && feed.length > 0 && <UserCards user={feed[0]} />}
+            {feed && feed.length > 0 && <UserCards user={feed[1]} />}
         </div >
     )
 }

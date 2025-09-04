@@ -9,6 +9,7 @@ import EditProfile from "./components/EditProfile";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import axios from "axios";
+import Signup from "./components/Signup";
 
 axios.defaults.withCredentials = true; // no need to modify axios requests
 
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/" element={<Body />}>
                             <Route path="/" element={<Feed />}></Route>
                             <Route path="/login" element={<Login />}></Route>
+                            <Route path="/signup" element={<Signup />}></Route>
                             <Route path="/profile" element={<Profile />} />
                             <Route path="/connections" element={<Connections />} />
                             <Route path="/requests" element={<Requests />} />
